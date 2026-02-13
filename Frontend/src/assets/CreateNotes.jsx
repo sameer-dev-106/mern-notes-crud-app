@@ -1,0 +1,37 @@
+import React from "react";
+import axios from "axios";
+
+const CereatNotes = ({ refreshNotes }) => {
+    async function submmitHandler(e) {
+    e.preventDefault();
+
+    const { title, description } = e.target.elements;
+
+    await axios.post("http://localhost:3000/api/notes", {
+        title: title.value,
+        description: description.value,
+    });
+
+    refreshNotes();
+    e.target.reset();
+    }
+
+    return (
+        <div className="form-model active">
+            <div className="form-container">
+                <h1>Create Notes</h1>
+                <form className="note-create-form" onSubmit={submmitHandler}>
+                    <input name="title" type="text" placeholder="Enter title" />
+                    <input
+                        name="description"
+                        type="text"
+                        placeholder="Enter description"
+                    />
+                    <button className="create-btn">Create Note</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default CereatNotes;
