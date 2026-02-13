@@ -95,6 +95,7 @@ html {
   position: fixed;
   top: 0%;
   left: 0%;
+  z-index: 5;
   color: var(--text);
   backdrop-filter: blur(4px);
   background-color: var(--blur-bg);
@@ -115,6 +116,17 @@ html {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  position: relative;
+}
+
+.from-model-close {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.3rem;
+  position: absolute;
+  top: 8%;
+  right: 8%;
 }
 
 .note-create-form {
@@ -147,7 +159,7 @@ html {
   box-shadow: var(--shadow-s);
 }
 
-.remove:active {
+.create-btn:active {
   transform: scale(0.95);
   box-shadow: var(--shadow-l);
   background-color: var(--btn-bg-light);
@@ -161,6 +173,7 @@ html {
   grid-gap: 1rem;
   padding: 1rem;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .note {
@@ -204,9 +217,31 @@ html {
   background-color: var(--btn-bg-light);
 }
 
+.add-note {
+  position: fixed;
+  top: 5%;
+  right: 1%;
+  z-index: 2;
+  border: none;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  color: hsl(0, 0%, 95%);
+  background-color: rgb(233, 53, 53);
+  box-shadow: var(--shadow-s);
+}
+
+.add-note:active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-l);
+  background-color: rgb(166, 54, 54);
+}
+
 @media (min-width: 650px) {
 
   .form-model {
+    display: flex;
     position: relative;
     backdrop-filter: none;
     background-color: none;
@@ -232,6 +267,11 @@ html {
   .notes {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .add-note,
+  .from-model-close {
+    display: none;
   }
 }
 
