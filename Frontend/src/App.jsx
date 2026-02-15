@@ -11,6 +11,10 @@ const App = () => {
 
   const [selectedNote, setSelectedNote] = useState(null);
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "dark";
+  })
+
   function fetchNotes() {
     axios.get("http://localhost:3000/api/notes").then((res) => {
       setNotes(res.data.notes);
@@ -28,9 +32,18 @@ const App = () => {
     fetchNotes();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
     <>
-      <Navbar setShowForm={setShowForm} />
+      <Navbar 
+        setShowForm={setShowForm} 
+        theme={theme}
+        setTheme={setTheme}
+      />
 
       <CreateNotes
         refreshNotes={fetchNotes}

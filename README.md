@@ -1,6 +1,6 @@
 # MERN Notes App
 
-A full stack notes management application built using the MERN stack.
+A full stack notes management application built using the MERN stack with modern UI and theme support.
 
 ## 🚀 Tech Stack
 
@@ -9,32 +9,43 @@ A full stack notes management application built using the MERN stack.
 - Express
 - MongoDB
 - Axios
+- Lucide Icons
 
 ## ✨ Features
 
-- Create notes with title and multi-line description
+- Create notes with multi-line description
 - View notes in responsive grid layout
 - Delete notes
 - Preview long descriptions with line clamp
-- Read full note inside modal view
-- Prevent blank note submission with validation
-- Fully responsive UI
+- Read full note in modal view
+- Prevent blank submissions with validation
+- Dark / Light theme toggle
+- Persistent theme using localStorage
+- Smooth theme transition animation
+- Animated moon/sun icon rotation
 - Custom styled scrollbar
-- Dark mode friendly design
+- Fully responsive layout
+
+## 🎨 UI Highlights
+
+- CSS variable based theming system
+- Smooth background color transitions
+- Modal based UX interactions
+- Clean card alignment with flexible layout
 
 ## 📦 Architecture
 
 Frontend communicates with backend REST API using Axios.  
 Backend handles CRUD operations and stores data in MongoDB.
 
-## 🛠 Future Improvements
+## 🔮 Future Improvements
 
-- Edit note functionality enhancement
+- Edit note functionality
 - Toast notifications
 - Authentication system
-- Deployment setup
-- Search and filter functionality
+- Search and filter feature
+- Cloud deployment
 
 ---
 
-Built as part of full stack development practice to strengthen MERN architecture and state management concepts.
+Built as a full stack MERN practice project to strengthen API integration, state management, UI architecture, and theme system implementation.
