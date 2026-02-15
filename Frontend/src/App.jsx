@@ -16,13 +16,13 @@ const App = () => {
   })
 
   function fetchNotes() {
-    axios.get("http://localhost:3000/api/notes").then((res) => {
+    axios.get("/api/notes").then((res) => {
       setNotes(res.data.notes);
     });
   }
 
   function deleteNote(noteId) {
-    axios.delete(`http://localhost:3000/api/notes/${noteId}`)
+    axios.delete(`/api/notes/${noteId}`)
     .then(() => {
       fetchNotes()
     })

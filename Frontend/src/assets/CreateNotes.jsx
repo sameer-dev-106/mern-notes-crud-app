@@ -12,7 +12,7 @@ const CereatNotes = ({ refreshNotes,  showForm, setShowForm }) => {
             return;
         }
 
-        await axios.post("http://localhost:3000/api/notes", {
+        await axios.post("/api/notes", {
             title: title.value,
             description: description.value,
         });
