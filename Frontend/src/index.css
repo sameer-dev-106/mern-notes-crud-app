@@ -87,9 +87,35 @@ html {
   background-color: var(--bg-dark);
   overflow-y: auto;
   scroll-behavior: smooth;
+  padding: 1rem;
+  padding-left: 1.5rem;
 }
 
-.form-model {
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg);
+  color: var(--text);
+  border-radius: 0.7rem;
+  box-shadow: var(--shadow-s);
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+}
+
+nav h1 {
+  font-size: 1.5rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-model,
+.read-model {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -104,29 +130,24 @@ html {
   justify-content: center;
 }
 
-.form-model.active {
+.form-model.active,
+.read-model.active {
   display: flex;
 }
 
-.form-container {
+.form-container,
+.read-form-container {
   width: 85%;
-  background-color: var(--bg);
-  padding: 3rem;
-  border-radius: 0.7rem;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  position: relative;
+  padding: 3rem;
+  background-color: var(--bg);
+  border-radius: 0.7rem;
 }
 
-.from-model-close {
-  border: none;
-  background: transparent;
-  color: var(--text);
-  font-size: 1.3rem;
-  position: absolute;
-  top: 8%;
-  right: 8%;
+.form-container>h1 {
+  padding-bottom: 2rem;
 }
 
 .note-create-form {
@@ -135,28 +156,40 @@ html {
   gap: 1rem;
 }
 
-.note-create-form input {
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.note-create-form input,
+.note-create-form textarea {
+  width: 100%;
   padding: 0.5rem 0.7rem;
+  font-size: 1rem;
   border: none;
   border-radius: 0.3rem;
-  background-color: var(--bg-light);
   color: var(--text);
-  font-size: 1rem;
+  background-color: var(--bg-light);
+  resize: none;
   box-shadow: 
     inset 0 1px 2px #00000030, 
     0 1px 2px #ffffff30, 
     0 2px 4px #ffffff15;
 }
 
-.create-btn {
-  margin-top: 1rem;
+.create-btn,
+.from-model-close,
+.read-model-close {
+  width: fit-content;
   border: none;
   border-radius: 0.4rem;
-  padding: 0.8rem;
   font-size: 1rem;
+  margin-top: 1rem;
+  padding: 0.8rem;
   color: var(--text);
   background-color: var(--btn-bg);
   box-shadow: var(--shadow-s);
+  transition: all transform ease 0.5s;
 }
 
 .create-btn:active {
@@ -165,46 +198,61 @@ html {
   background-color: var(--btn-bg-light);
 }
 
+.empty-state {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
 .notes {
-  width: 90%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
+  justify-items: center;
+  position: relative;
   margin: 0 auto;
   grid-gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0;
   margin-bottom: 2rem;
-  position: relative;
 }
 
 .note {
   width: 100%;
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 0.7rem;
+  padding: 2rem;
   text-transform: capitalize;
-  background-color: var(--bg);
+  font-size: 1rem;
   color: var(--text);
-  padding: 2rem 3rem;
+  background-color: var(--bg);
   border-radius: 0.6rem;
-  max-width: 20rem;
   box-shadow: var(--shadow-s);
+  cursor: pointer;
 }
 
 .note p {
   color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.5rem;
 }
 
 .remove {
-  margin-top: 1rem;
   border: none;
   border-radius: 0.4rem;
+  margin-top: auto;
   padding: 0.5rem 0.8rem;
   font-size: 1rem;
   color: var(--text);
   background-color: var(--btn-bg);
   box-shadow: var(--shadow-s);
+  transition: all transform ease 0.5s;
 }
 
 .remove:hover {
@@ -217,42 +265,57 @@ html {
   background-color: var(--btn-bg-light);
 }
 
-.add-note {
-  position: fixed;
-  top: 5%;
-  right: 1%;
-  z-index: 2;
-  border: none;
-  border-top-left-radius: 0.4rem;
-  border-bottom-left-radius: 0.4rem;
-  padding: 0.5rem 0.8rem;
-  font-size: 1rem;
-  color: hsl(0, 0%, 95%);
-  background-color: rgb(233, 53, 53);
-  box-shadow: var(--shadow-s);
+.add,
+.mode{
+  transition: all transform ease 0.5s;
 }
 
-.add-note:active {
+.add:active,
+.mode:active {
   transform: scale(0.95);
-  box-shadow: var(--shadow-l);
-  background-color: rgb(166, 54, 54);
+}
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* Hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
 }
 
 @media (min-width: 650px) {
 
+  nav h1 {
+    font-size: 2rem;
+  }
+
   .form-model {
-    display: flex;
     position: relative;
     backdrop-filter: none;
-    background-color: none;
+    background-color: var(--bg-dark);
     height: auto;
   }
 
   .form-container {
     width: 100%;
-    border-radius: 0%;
-    background-color: var(--bg-dark);
+    border-radius: 0.7rem;
+    box-shadow: var(--shadow-s);
+    background-color: var(--bg);
     padding: 1.5rem;
+    margin-top: 1rem;
   }
 
   .note-create-form {
@@ -265,14 +328,9 @@ html {
   }
 
   .notes {
-    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .add-note,
-  .from-model-close {
-    display: none;
-  }
 }
 
 @media (min-width: 950px) {

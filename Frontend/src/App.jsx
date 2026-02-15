@@ -2,11 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import CreateNotes from "./assets/CreateNotes";
+import Navbar from "./assets/Navbar";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
 
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(false);
+
+  const [selectedNote, setSelectedNote] = useState(null);
 
   function fetchNotes() {
     axios.get("http://localhost:3000/api/notes").then((res) => {
@@ -15,9 +18,10 @@ const App = () => {
   }
 
   function deleteNote(noteId) {
-    axios.delete(`http://localhost:3000/api/notes/${noteId}`);
-    
-    fetchNotes();
+    axios.delete(`http://localhost:3000/api/notes/${noteId}`)
+    .then(() => {
+      fetchNotes()
+    })
   }
 
   useEffect(() => {
@@ -26,31 +30,64 @@ const App = () => {
 
   return (
     <>
-      <CreateNotes 
-        refreshNotes={fetchNotes} 
+      <Navbar setShowForm={setShowForm} />
+
+      <CreateNotes
+        refreshNotes={fetchNotes}
         showForm={showForm}
         setShowForm={setShowForm}
       />
 
-      <button className="add-note"
-        onClick={() => setShowForm(true)}
-      >Add Note</button>
-
       <div className="notes">
-        {notes.map(note => {
+
+        {notes.length === 0 && (
+          <p className="empty-state">No notes yet. Create one!</p>
+        )}
+
+        {notes.map((note) => {
           return (
-            <div className="note" key={note._id}>
+            <div 
+              className="note" 
+              key={note._id}
+              onClick={() => setSelectedNote(note)}
+            >
               <h1>{note.title}</h1>
               <p>{note.description}</p>
-              <button className="remove"
-                onClick={() => {
-                  deleteNote(note._id)
+              <button
+                className="remove"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteNote(note._id);
                 }}
-              >Remove</button>
+              >
+                Remove
+              </button>
             </div>
           );
         })}
       </div>
+      {selectedNote && (
+        <div 
+          className="read-model active"
+          onClick={() => setSelectedNote(null)}
+        >
+          <div 
+            className="read-form-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h1>{ selectedNote.title }</h1>
+            <p style={{ whiteSpace: "pre-line" }}> 
+              { selectedNote.description }
+            </p>
+            <button 
+              className="read-model-close"
+              onClick={() => setSelectedNote(null)}
+            >
+              close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -7,6 +7,11 @@ const CereatNotes = ({ refreshNotes,  showForm, setShowForm }) => {
 
         const { title, description } = e.target.elements;
 
+        if (!title.value.trim() || !description.value.trim()) {
+            alert("Title and Description required");
+            return;
+        }
+
         await axios.post("http://localhost:3000/api/notes", {
             title: title.value,
             description: description.value,
@@ -14,6 +19,7 @@ const CereatNotes = ({ refreshNotes,  showForm, setShowForm }) => {
 
         refreshNotes();
         e.target.reset();
+        setShowForm(false);
     }
 
     return (
@@ -22,12 +28,6 @@ const CereatNotes = ({ refreshNotes,  showForm, setShowForm }) => {
         >
             <div className="form-container">
                 <h1>Create Notes</h1>
-                <button 
-                    className="from-model-close"
-                    onClick={() => setShowForm(false) }
-                >
-                    ✕
-                </button>
                 <form 
                     className="note-create-form" 
                     onSubmit={submmitHandler}
@@ -37,15 +37,23 @@ const CereatNotes = ({ refreshNotes,  showForm, setShowForm }) => {
                         type="text" 
                         placeholder="Enter title" 
                     />
-                    <input
+                    <textarea
                         name="description"
-                        type="tel"
                         placeholder="Enter description"
+                        rows="4"
                     />
-                    <button 
-                        className="create-btn"
-                        onClick={() => setShowForm(false) }
-                    >Create Note</button>
+                    <div className="form-buttons">
+                        <button type="submit" className="create-btn">
+                            Create Note
+                        </button>
+                        <button
+                            type="button"
+                            className="from-model-close"
+                            onClick={() => setShowForm(false)}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
