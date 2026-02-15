@@ -1,6 +1,9 @@
 # MERN Notes App
 
-A full stack notes management application built using the MERN stack with modern UI and theme support.
+A production ready full stack notes management application built using the MERN stack.  
+Frontend is bundled and served directly from the backend for unified deployment.
+
+---
 
 ## 🚀 Tech Stack
 
@@ -11,41 +14,66 @@ A full stack notes management application built using the MERN stack with modern
 - Axios
 - Lucide Icons
 
+---
+
 ## ✨ Features
 
-- Create notes with multi-line description
+- Create notes with multi line description
 - View notes in responsive grid layout
 - Delete notes
-- Preview long descriptions with line clamp
+- Preview long descriptions using line clamp
 - Read full note in modal view
 - Prevent blank submissions with validation
-- Dark / Light theme toggle
+- Dark and Light theme toggle
 - Persistent theme using localStorage
 - Smooth theme transition animation
-- Animated moon/sun icon rotation
+- Animated moon and sun icon rotation
 - Custom styled scrollbar
 - Fully responsive layout
+- Production build served via Express
 
-## 🎨 UI Highlights
-
-- CSS variable based theming system
-- Smooth background color transitions
-- Modal based UX interactions
-- Clean card alignment with flexible layout
+---
 
 ## 📦 Architecture
 
-Frontend communicates with backend REST API using Axios.  
-Backend handles CRUD operations and stores data in MongoDB.
+Browser  
+↓  
+Express Server  
+↓  
+Serves React production build  
+↓  
+REST API  
+↓  
+MongoDB Database  
 
-## 🔮 Future Improvements
+Single server deployment architecture.
+
+---
+
+## 🔥 Deployment Ready
+
+Frontend production build is integrated inside backend using Express static middleware.  
+
+Application runs fully on:
+
+```
+http://localhost:3000
+```
+
+Ready for cloud deployment.
+
+---
+
+## 🔮 Upcoming Features
 
 - Edit note functionality
+- Update description API
 - Toast notifications
+- Search and filter feature
 - Authentication system
 - Search and filter feature
 - Cloud deployment
 
 ---
 
-Built as a full stack MERN practice project to strengthen API integration, state management, UI architecture, and theme system implementation.
+Built as a full stack MERN practice project to strengthen API integration, backend architecture, production deployment strategy, and UI theming system implementation.
