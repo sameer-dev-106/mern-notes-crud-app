@@ -5,12 +5,18 @@ Frontend is bundled and served directly from the backend for unified deployment.
 
 ---
 
+## 🌍 Live Demo
+
+https://mern-notes-crud-app.onrender.com/
+
+---
+
 ## 🚀 Tech Stack
 
 - React
 - Node.js
 - Express
-- MongoDB
+- MongoDB Atlas
 - Axios
 - Lucide Icons
 
@@ -19,8 +25,9 @@ Frontend is bundled and served directly from the backend for unified deployment.
 ## ✨ Features
 
 - Create notes with multi line description
-- View notes in responsive grid layout
+- View notes in responsive responsive grid layout
 - Delete notes
+- Update note description
 - Preview long descriptions using line clamp
 - Read full note in modal view
 - Prevent blank submissions with validation
@@ -50,29 +57,64 @@ Single server deployment architecture.
 
 ---
 
-## 🔥 Deployment Ready
+## 🔥 Deployment
 
-Frontend production build is integrated inside backend using Express static middleware.  
+The application is deployed on Render as a Web Service.
 
-Application runs fully on:
+Frontend production build is generated using Vite and served from the backend using Express static middleware.
+
+Environment variables are securely managed using Render environment configuration.
+
+Live URL:
+
+```
+https://mern-notes-crud-app.onrender.com/
+```
+
+---
+
+## 🛠 How To Run Locally
+
+### 1. Clone the repository
+
+```
+git clone <your-repo-url>
+```
+
+### 2. Install dependencies
+
+Frontend:
+
+```
+cd Frontend
+npm install
+npm run build
+```
+
+Backend:
+
+```
+cd Backend
+npm install
+npm run dev
+```
+
+### 3. Open in browser
 
 ```
 http://localhost:3000
 ```
 
-Ready for cloud deployment.
-
 ---
 
-## 🔮 Upcoming Features
+## 🔮 Future Improvements
 
-- Edit note functionality
-- Update description API
+- Edit note UI improvement
 - Toast notifications
 - Search and filter feature
 - Authentication system
-- Search and filter feature
-- Cloud deployment
+- Better error handling
+- Custom domain setup
 
 ---
 
